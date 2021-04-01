@@ -1,5 +1,7 @@
 #include <iostream>
 
+
+
 #include "Pacman.h"
 
 
@@ -9,7 +11,7 @@ int main() {
 	
 	Pacman pacmansito;
 
-	pacmansito.	
+	
 
 
 	cout << "Main de prueba" << endl;
