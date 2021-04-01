@@ -15,9 +15,9 @@ public:
 	
 
 	float getVelocidadX() { return velocidadX ; }
-	void  setVelocidadX(float _velocidadX) { posicionX = _velocidadX; }
+	void  setVelocidadX(float _velocidadX) { velocidadX = _velocidadX; }
 	float getVelocidadY() { return velocidadY; }
-	void  setVelocidadY(float _velocidadY) { posicionY = _velocidadY; }
+	void  setVelocidadY(float _velocidadY) { velocidadY = _velocidadY; }
 
 
 
