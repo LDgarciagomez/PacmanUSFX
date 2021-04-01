@@ -139,11 +139,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Contador_de_puntos.cpp" />
+    <ClCompile Include="Contador_de_tiempo.cpp" />
+    <ClCompile Include="Contador_de_vidas.cpp" />
+    <ClCompile Include="Fantasma.cpp" />
+    <ClCompile Include="Frutas.cpp" />
+    <ClCompile Include="Game_manager.cpp" />
+    <ClCompile Include="Generador_fantasmas.cpp" />
+    <ClCompile Include="Habilidad.cpp" />
+    <ClCompile Include="Laberinto.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Moneda.cpp" />
+    <ClCompile Include="Muro.cpp" />
+    <ClCompile Include="Nivel.cpp" />
     <ClCompile Include="Pacman.cpp" />
+    <ClCompile Include="Super_moneda.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Contador_de_puntos.h" />
+    <ClInclude Include="Contador_de_tiempo.h" />
+    <ClInclude Include="Contador_de_vidas.h" />
+    <ClInclude Include="Fantasma.h" />
+    <ClInclude Include="Frutas.h" />
+    <ClInclude Include="Game_manager.h" />
+    <ClInclude Include="Generador_fantasmas.h" />
+    <ClInclude Include="Habilidad.h" />
+    <ClInclude Include="Laberinto.h" />
+    <ClInclude Include="Moneda.h" />
+    <ClInclude Include="Muro.h" />
+    <ClInclude Include="Nivel.h" />
     <ClInclude Include="Pacman.h" />
+    <ClInclude Include="Super_moneda.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
