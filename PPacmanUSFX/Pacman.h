@@ -21,6 +21,7 @@ public:
 	//int getPosicionY() { return posicion.y; }
 	//void setPosicionX(int _x) { posicion.x = _x; }
 	//void setPosicionX(int _y) { posicion.y = _y;  }
+	//xd
 
 	SDL_Point getVelocidad() { return velocidad; }
 	void  setVelocidad(SDL_Point _velocidad) { velocidad = _velocidad; }
