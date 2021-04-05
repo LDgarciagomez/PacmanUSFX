@@ -8,7 +8,7 @@ class Textura
 public:
 	//Initializes variables
 	Textura();
-
+	Textura(int _x, int _y) {};
 	//Deallocates memory
 	~Textura();
 
