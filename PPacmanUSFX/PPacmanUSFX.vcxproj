@@ -157,6 +157,7 @@
     <ClCompile Include="Nivel.cpp" />
     <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="Super_moneda.cpp" />
+    <ClCompile Include="Textura.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Contador_de_puntos.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Nivel.h" />
     <ClInclude Include="Pacman.h" />
     <ClInclude Include="Super_moneda.h" />
+    <ClInclude Include="Textura.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
