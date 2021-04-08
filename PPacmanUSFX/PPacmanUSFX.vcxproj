@@ -156,6 +156,7 @@
     <ClCompile Include="Muro.cpp" />
     <ClCompile Include="Nivel.cpp" />
     <ClCompile Include="Pacman.cpp" />
+    <ClCompile Include="26_motion.cpp" />
     <ClCompile Include="Super_moneda.cpp" />
     <ClCompile Include="Textura.cpp" />
   </ItemGroup>
