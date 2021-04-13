@@ -27,7 +27,7 @@
     <ClCompile Include="Moneda.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Frutas.cpp">
+    <ClCompile Include="Fruta.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Muro.cpp">
@@ -63,9 +63,6 @@
     <ClCompile Include="Textura.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="26_motion.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pacman.h">
@@ -77,7 +74,7 @@
     <ClInclude Include="Moneda.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Frutas.h">
+    <ClInclude Include="Fruta.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Muro.h">

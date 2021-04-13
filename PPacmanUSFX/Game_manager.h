@@ -5,51 +5,58 @@
 #include <time.h>
 
 #include <SDL.h>
+#include <SDL_image.h>
 
 #include "Pacman.h"
 #include "Fantasma.h"
-#include "Frutas.h"
+#include "Fruta.h"
 
 using namespace std;
 
 
-//Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
 
 class Game_manager
 {
 private:
     bool juego_en_ejecucion;
 
-    //The window we'll be rendering to
+    //La ventana que será renderizada
     SDL_Window* gWindow;
 
-    //The window renderer
+    //El renderizador de la pantalla
     SDL_Renderer* gRenderer;
 
-    //The surface contained by the window
+    //La superficie en la pantalla
     SDL_Surface* gScreenSurface;
 
-    //The images we will load and show on the screen
-    SDL_Surface* gPacManSurface;
-    SDL_Surface* gFantasmaSurface;
-    SDL_Surface* gFrutaSurface;
+    //Imágenes que se mostrarán en la pantalla
+    SDL_Texture* gPacmanTexture;
+    SDL_Texture* gFantasmaTexture[4];
+    SDL_Texture* gfrutaTexture[5];
+
 
 public:
+
+    //Dimensiones de la pantalla
+    int ancho = 640;
+    int alto = 480;
+
+    //Objetos a crearse
+    Pacman* pacman;
+    Fantasma* fantasma[4];
+    Fruta* fruta[5];
+
+    //Constructor
     Game_manager();
+
+    //Funciones varias
     int onExecute();
-
     bool onInit();
-
     void onEvent(SDL_Event* Event);
     void onLoop();
+    bool ChangeFruta();
     void onRender();
     void onCleanup();
-
-    /*  SDL_Surface* loadMediaToSurface(string _mediaFile);*/
-
-    Pacman* pacman;
-    Fantasma fantasma;
-    Fruta* fruta;
+    SDL_Texture* loadTexture(string path);
 };
+

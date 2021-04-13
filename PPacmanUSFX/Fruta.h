@@ -1,35 +1,36 @@
 #pragma once
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+#include <time.h>
+
 #include <SDL.h>
+#include <SDL_image.h>
 
-
-enum TIPO_FRUTA {
-	TIPO_FRUTA_GUINDA,
-	TIPO_FRUTA_FRUTILLA,
-	TIPO_FRUTA_NARANJA,
-	TIPO_FRUTA_PLATANO,
-	TIPO_FRUTA_MANZANA
-};
-
+using namespace std;
 
 class Fruta
 {
 private:
-	// Ubicacion donde aparece la fruta
+	// Posicion actual de la fruta en la pantalla
 	int posicionX;
 	int posicionY;
 
+	//Alto y ancho de la fruta
 	int ancho;
 	int alto;
 
+	//Alto y ancho de la pantalla
 	int anchoPantalla;
 	int altoPantalla;
 
-	TIPO_FRUTA tipoFruta;
+	//Tipo de fruta
+	int tipo;
 
+	//Recursos para la funcion "mostrar"
 	bool visible;
 	int tiempoVisible;
 	int tiempoNoVisible;
-
 	int contadorTiempoVisible;
 	int contadorTiempoNoVisible;
 
@@ -38,17 +39,19 @@ public:
 	SDL_Window* window = nullptr;
 
 	// Renderizador de la ventana
-	SDL_Renderer* renderer = nullptr;
+	SDL_Renderer* renderer;
 
 	// La superficie grafica (surface) que contiene la ventana
 	SDL_Surface* screenSurface = nullptr;
 
 	// Supeerficie grafica del fantasma;
-	SDL_Surface* frutaSurface = nullptr;
+	SDL_Texture* frutaTexture = nullptr;
 
-public:
 	//Constructores y destructores
+
 	Fruta();
+	Fruta(int _posicionX, int _posicionY, int tipo);
+	Fruta(int _posicionX, int _posicionY, int _tipo, SDL_Window* _window, SDL_Renderer* _renderer, SDL_Surface* _screenSurface, SDL_Texture* _frutaTexture);
 	//~Fruta();
 
 	//Metodos accesores
@@ -59,10 +62,11 @@ public:
 	int getAlto() { return alto; }
 	int getAnchoPantalla() { return anchoPantalla; }
 	int getAltoPantalla() { return altoPantalla; }
-	TIPO_FRUTA getTipoFruta() { return tipoFruta; }
+	int getTipo() { return tipo; }
 	bool getVisible() { return visible; }
 	int getTiempoVisible() { return tiempoVisible; }
 	int getTiempoNoVisible() { return tiempoNoVisible; }
+
 
 	void setPosicionX(int _posicionX) { posicionX = _posicionX; }
 	void setPosicionY(int _posicionY) { posicionY = _posicionY; }
@@ -70,19 +74,17 @@ public:
 	void setAlto(int _alto) { alto = _alto; }
 	void setAnchoPantalla(int _anchoPantalla) { anchoPantalla = _anchoPantalla; }
 	void setAltoPantalla(int _altoPantalla) { altoPantalla = _altoPantalla; }
-	void setTipoFruta(TIPO_FRUTA _tipoFruta) { tipoFruta = _tipoFruta; }
+	void setTipo(int _tipo) { tipo = _tipo; }
 	void setVisible(bool _visible) { visible = _visible; }
 	void setTiempoVisble(int _tiempoVisible) { tiempoVisible = _tiempoVisible; }
 	void setTiempoNoVisble(int _tiempoNoVisible) { tiempoNoVisible = _tiempoNoVisible; }
 
-	// Metodos varios
 
-	// Manejador de eventos de la fruta
-	//void handleEvent(SDL_Event& e);
+	// Metodos varios
 
 	// Mostrar u ocultar fruta
 	void mostrar();
-	// Renderizar imagen fruta
-	void render();
 
+	// Renderizar imagen fruta
+	void render(SDL_Texture* Textura);
 };

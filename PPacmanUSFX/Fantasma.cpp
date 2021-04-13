@@ -1,79 +1,260 @@
 #include "Fantasma.h"
-#include <iostream>
 
 using namespace std;
 
-Fantasma::Fantasma() {
-	posicionX = 100;
-	posicionY = 100;
+Fantasma::Fantasma(int _posicionX, int _posicionY, int _posicionXf, int _posicionYf) {
+	posicionX = _posicionX;
+	posicionY = _posicionY;
 	velocidadX = 1;
-	velocidadY = 0;
-	velocidadPatron = 5;
+	velocidadY = 1;
+	
 	ancho = 20;
 	alto = 20;
 	anchoPantalla = 640;
 	altoPantalla = 480;
+	
+	//posicionXi = 0;
+	//posicionYi = 0;
+
+	posicionXf = posicionX + _posicionXf;
+	posicionYf = posicionY + _posicionYf;
+}
+
+Fantasma::Fantasma(int _posicionX, int _posicionY, int _posicionXf, int _posicionYf, SDL_Window* _window, SDL_Renderer* _renderer, SDL_Surface* _screenSurface, SDL_Texture* _fantasmaTexture)
+{
+	posicionX = _posicionX;
+	posicionY = _posicionY;
+	velocidadX = 1;
+	velocidadY = 1;
+	
+	ancho = 20;
+	alto = 20;
+	anchoPantalla = 640;
+	altoPantalla = 480;
+	window = _window;
+	renderer = _renderer;
+	screenSurface = _screenSurface;
+	fantasmaTexture = _fantasmaTexture;
+	
+	//posicionXi = 0;
+	//posicionYi = 0;
+
+	posicionXf = posicionX + _posicionXf;
+	posicionYf = posicionY + _posicionYf;
 }
 
 
 void Fantasma::move()
 {
+	
+	
 
-	// Mover el fantasma a la izquierda o derecha
-	posicionX += velocidadX;
-
-	// Verificar si la posicion del fantasma no salio de los bordes izquierdo o derecho
-	if ((posicionX < 0) || (posicionX + ancho > anchoPantalla))
+	if (posicionX != posicionXf)
 	{
-		// Mover fantasma atras
-		posicionX -= velocidadX;
+		if (posicionX <= posicionXf)
+			posicionX += velocidadX;
+		else
+			posicionX -= velocidadX;
+		if (posicionX <= 0)
+		{
+			posicionX += velocidadX;
+			posicionXf = posicionX;
+			posicionYf = posicionY + ((rand() % 200) -100);
+		}
+		if (posicionX + ancho >= anchoPantalla)
+		{
+			posicionX -= velocidadX;
+			posicionXf = posicionX;
+			posicionYf = posicionY + ((rand() % 200) - 100);
+		}
+		if (posicionY + alto >= altoPantalla)
+		{
+			posicionX -= velocidadX;
+			posicionXf = posicionX;
+			posicionYf = posicionY + ((rand() % 200) - 100);
+		}
 	}
-
-	// Mover el fantasma arriba o abajo
-	posicionY += velocidadY;
-
-	// Verificar si la posicion del fantasma no salio de los bordes superior e inferior
-	if ((posicionY < 0) || (posicionY + alto > altoPantalla))
+	else
 	{
-		// Mover fantasma atras
-		posicionY -= velocidadY;
+		if (posicionY != posicionYf)
+		{
+			if (posicionY < posicionYf)
+				posicionY += velocidadY;
+			else
+				posicionY -= velocidadY;
+			if (posicionY <= 0) 
+			{
+				posicionY += velocidadY;
+				posicionYf = posicionY;
+				posicionXf = posicionX + ((rand() % 200) - 100);
+			}
+			if (posicionY + alto > altoPantalla)
+			{
+				posicionY -= velocidadY;
+				posicionYf = posicionY;
+				posicionXf = posicionX + ((rand() % 200) - 100);
+			}
+			if (posicionX + ancho > anchoPantalla)
+			{
+				posicionY -= velocidadY;
+				posicionYf = posicionY;
+				posicionXf = posicionX + ((rand() % 200) - 100);
+			}
+		}
+		else
+		{
+			posicionXf = posicionX + ((rand() % 200) - 100);
+			posicionYf = posicionY + ((rand() % 200) - 100);
+		}
 	}
+	
+	
+	/*if (posicionXi != posicionXf)
+{
+	if (posicionXi <= posicionXf)
+		posicionXi += velocidadX;
+	else
+		posicionXi -= velocidadX;
+	if (posicionXi <= 0)
+	{
+		posicionXi += velocidadX;
+		posicionXf = posicionXi;
+		posicionYf = posicionYi + ((rand() % 200) -100);
+	}
+	if (posicionX + ancho >= anchoPantalla)
+	{
+		posicionXi -= velocidadX;
+		posicionXf = posicionXi;
+		posicionYf = posicionYi + ((rand() % 200) - 100);
+	}
+	if (posicionYi + alto >= altoPantalla)
+	{
+		posicionXi -= velocidadX;
+		posicionXf = posicionXi;
+		posicionYf = posicionYi + ((rand() % 200) - 100);
+	}
+}
+else
+{
+	if (posicionYi != posicionYf)
+	{
+		if (posicionYi < posicionYf)
+			posicionYi += velocidadY;
+		else
+			posicionYi -= velocidadY;
+		if (posicionYi <= 0)
+		{
+			posicionYi += velocidadY;
+			posicionYf = posicionY;
+			posicionXf = posicionXi + ((rand() % 200) - 100);
+		}
+		if (posicionYi + alto > altoPantalla)
+		{
+			posicionYi -= velocidadY;
+			posicionYf = posicionYi;
+			posicionXf = posicionXi + ((rand() % 200) - 100);
+		}
+		if (posicionXi + ancho > anchoPantalla)
+		{
+			posicionYi -= velocidadY;
+			posicionYf = posicionY;
+			posicionXf = posicionXi + ((rand() % 200) - 100);
+		}
+	}
+	else
+	{
+		posicionXf = posicionXi + ((rand() % 200) - 100);
+		posicionYf = posicionYi + ((rand() % 200) - 100);
+	}
+}
+
+
+if (posicionXi <= posicionXf)
+	posicionXi += velocidadX;
+else
+	posicionXi -= velocidadX;
+if (posicionXi <= 0)
+{
+	posicionXi += velocidadX;
+	posicionXf = posicionXi;
+	posicionYf = posicionYi + ((rand() % 200) - 100);
+
+}
+if (posicionXi + ancho >= anchoPantalla)
+{
+	posicionXi -= velocidadX;
+	posicionXf = posicionXi;
+	posicionYf = posicionYi + ((rand() % 200) - 100);
+
+}
+if (posicionYi + alto >= altoPantalla)
+{
+	posicionXi -= velocidadX;
+	posicionXf = posicionXi;
+	posicionYf = posicionYi + ((rand() % 200) - 100);
+
+}
+}
+	else
+	{
+	if (posicionYi != posicionYf)
+	{
+		if (posicionYi < posicionYf)
+			posicionYi += velocidadY;
+		else
+			posicionYi -= velocidadY;
+		if (posicionYi <= 0)
+		{
+			posicionYi += velocidadY;
+			posicionYf = posicionYi;
+			posicionXf = posicionXi + ((rand() % 200) - 100);
+		}
+		if (posicionYi + alto > altoPantalla)
+		{
+			posicionYi -= velocidadY;
+			posicionYf = posicionYi;
+			posicionXf = posicionXi + ((rand() % 200) - 100);
+		}
+		if (posicionXi + ancho > anchoPantalla)
+		{
+			posicionYi -= velocidadY;
+			posicionYf = posicionYi;
+			posicionXf = posicionXi + ((rand() % 200) - 100);
+		}
+	}
+	else
+	{
+		posicionXf = posicionXi + ((rand() % 200) - 100);
+		posicionYf = posicionYi + ((rand() % 200) - 100);
+	}
+	}*/
+
+
+	//Mover el fantasma a la izquierda o derecha
+	//posicionX += velocidadX;
+
+	//// Verificar si la posicion del fantasma no salio de los bordes izquierdo o derecho
+	//if ((posicionX < 0) || (posicionX + ancho > anchoPantalla))
+	//{
+	//	// Mover fantasma atras
+	//	posicionX -= velocidadX;
+	//}
+
+	//// Mover el fantasma arriba o abajo
+	////posicionY += velocidadY;
+
+	//// Verificar si la posicion del fantasma no salio de los bordes superior e inferior
+	//if ((posicionY < 0) || (posicionY + alto > altoPantalla))
+	//{
+	//	// Mover fantasma atras
+	//	posicionY -= velocidadY;
+	//}
+
+
 }
 
 void Fantasma::render()
 {
-	// Color primario de la imagen del fantasma
-	//SDL_SetColorKey(screenSurface, SDL_TRUE, SDL_MapRGB(fantasmaSurface->format, 0, 0, 0));
-
-	SDL_Texture* nuevaTextura = NULL;
-
-	nuevaTextura = SDL_CreateTextureFromSurface(renderer, fantasmaSurface);
-	if (nuevaTextura == NULL)
-	{
-		cout << "No se puede crear una textura a partir de fantasmaSurface, SDL Error: " << SDL_GetError() << endl;
-	}
-	else
-	{
-		// Obtener dimension de la imagen
-		ancho = fantasmaSurface->w;
-		alto = fantasmaSurface->h;
-	}
-
-	/*SDL_Rect* clip = nullptr;
-	double angle = 0.0;
-	SDL_Point* center = nullptr;
-	SDL_RendererFlip flip = SDL_FLIP_NONE;*/
-
 	SDL_Rect renderQuad = { posicionX, posicionY, ancho, alto };
-
-	// Establecer las dimensionces del recorte para remderizar
-	/*if (clip != NULL)
-	{
-		renderQuad.w = clip->w;
-		renderQuad.h = clip->h;
-	}*/
-
-	// Renderizar en la pantalla
-	//SDL_RenderCopyEx(renderer, nuevaTextura, clip, &renderQuad, angle, center, flip);
-	SDL_RenderCopyEx(renderer, nuevaTextura, nullptr, &renderQuad, 0.0, nullptr, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(renderer, fantasmaTexture, nullptr, &renderQuad, 0.0, nullptr, SDL_FLIP_NONE);
 }
