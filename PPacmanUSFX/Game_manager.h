@@ -10,6 +10,8 @@
 #include "Pacman.h"
 #include "Fantasma.h"
 #include "Fruta.h"
+#include "Moneda.h"
+#include "Texture.h"
 
 using namespace std;
 
@@ -30,9 +32,10 @@ private:
     SDL_Surface* gScreenSurface;
 
     //Imágenes que se mostrarán en la pantalla
-    SDL_Texture* gPacmanTexture;
-    SDL_Texture* gFantasmaTexture[4];
-    SDL_Texture* gfrutaTexture[5];
+    Texture* gPacmanTexture;
+    Texture* gFantasmaTexture[4];
+    vector<Texture*> gFrutaTexture;
+    Texture* gMonedaTexture[24];
 
 
 public:
@@ -45,6 +48,7 @@ public:
     Pacman* pacman;
     Fantasma* fantasma[4];
     Fruta* fruta[5];
+    Moneda* moneda[24];
 
     //Constructor
     Game_manager();
@@ -54,9 +58,8 @@ public:
     bool onInit();
     void onEvent(SDL_Event* Event);
     void onLoop();
-    bool ChangeFruta();
+    bool ChangeImgFruta();
     void onRender();
     void onCleanup();
     SDL_Texture* loadTexture(string path);
 };
-

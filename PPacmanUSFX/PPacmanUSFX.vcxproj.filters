@@ -60,7 +60,13 @@
     <ClCompile Include="Game_manager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Textura.cpp">
+    <ClCompile Include="Texture.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjetoJuego.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,7 +116,13 @@
     <ClInclude Include="Movimiento.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Textura.h">
+    <ClInclude Include="Texture.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjetoJuego.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

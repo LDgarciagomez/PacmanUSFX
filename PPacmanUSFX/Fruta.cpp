@@ -4,29 +4,12 @@
 #include <time.h>
 using namespace std;
 
-Fruta::Fruta()
-{
-	posicionX = 100;
-	posicionY = 100;
-	ancho = 20;
-	alto = 20;
-	anchoPantalla = 640;
-	altoPantalla = 480;
-	visible = false;
-	tiempoVisible = 100;
-	tiempoNoVisible = 150;
-	contadorTiempoVisible = 0;
-	contadorTiempoNoVisible = 0;
-	tipo = 1;
-}
 
-Fruta::Fruta(int _posicionX, int _posicionY, int _tipo) {
-	posicionX = _posicionX;
-	posicionY = _posicionY;
+Fruta::Fruta(int _posicionX, int _posicionY, int _tipo) :
+	GameObject(_posicionX, _posicionY, ancho, alto, anchoPantalla, altoPantalla)
+{
 	ancho = 20;
 	alto = 20;
-	anchoPantalla = 640;
-	altoPantalla = 480;
 	visible = false;
 	tiempoVisible = 100;
 	tiempoNoVisible = 150;
@@ -35,23 +18,17 @@ Fruta::Fruta(int _posicionX, int _posicionY, int _tipo) {
 	tipo = _tipo;
 };
 
-Fruta::Fruta(int _posicionX, int _posicionY, int _tipo, SDL_Window* _window, SDL_Renderer* _renderer, SDL_Surface* _screenSurface, SDL_Texture* _frutaTexture)
+Fruta::Fruta(int _posicionX, int _posicionY, int _tipo, vector<Texture*> _frutaTexture) :
+	GameObject(_posicionX, _posicionY, ancho, alto, anchoPantalla, altoPantalla)
 {
-	posicionX = _posicionX;
-	posicionY = _posicionY;
 	ancho = 20;
 	alto = 20;
-	anchoPantalla = 640;
-	altoPantalla = 480;
 	visible = false;
 	tiempoVisible = 100;
 	tiempoNoVisible = 150;
 	contadorTiempoVisible = 0;
 	contadorTiempoNoVisible = 0;
 	tipo = _tipo;
-	window = _window;
-	renderer = _renderer;
-	screenSurface = _screenSurface;
 	frutaTexture = _frutaTexture;
 }
 
@@ -61,9 +38,9 @@ void Fruta::mostrar()
 	if (contadorTiempoVisible >= tiempoVisible) {
 		visible = false;
 		if (contadorTiempoNoVisible >= tiempoNoVisible) {
-			posicionX = 100 + rand() % (600 - 100);
-			posicionY = 100 + rand() % (400 - 100);
-			tipo = 1 + rand() % (6 - 1);
+			posicionX = 1 + rand() % (anchoPantalla - 1);
+			posicionY = 1 + rand() % (altoPantalla - 1);
+			tipo = rand() % frutaTexture.size();
 			contadorTiempoVisible = 0;
 			contadorTiempoNoVisible = 0;
 			visible = true;
@@ -78,10 +55,12 @@ void Fruta::mostrar()
 	}
 }
 
-void Fruta::render(SDL_Texture* Textura)
+void Fruta::render()
 {
 	if (visible) {
-		SDL_Rect renderQuad = { posicionX, posicionY, ancho, alto };
-		SDL_RenderCopyEx(renderer, Textura, nullptr, &renderQuad, 0.0, nullptr, SDL_FLIP_NONE);
+		SDL_Rect clip = { 0, 0, ancho, alto };
+		frutaTexture[tipo]->render(posicionX, posicionY, &clip);
+
 	}
+
 }
