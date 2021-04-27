@@ -20,6 +20,7 @@ using namespace std;
 class Game_manager
 {
 private:
+
     bool juego_en_ejecucion;
 
     //La ventana que será renderizada
@@ -32,10 +33,14 @@ private:
     SDL_Surface* gScreenSurface;
 
     //Imágenes que se mostrarán en la pantalla
-    Texture* gPacmanTexture;
-    Texture* gFantasmaTexture[4];
+    vector<Texture*> gPacmanTexture;
+    vector<Texture*> texturas;
+    vector<Texture*> gFantasmaTexture;
     vector<Texture*> gFrutaTexture;
-    Texture* gMonedaTexture[24];
+    vector<Texture*> gMonedaTexture;
+    //Texture* gPacmanTexture;
+    //Texture* gFantasmaTexture[4];
+    /* Texture* gMonedaTexture[24];*/
 
 
 public:
@@ -45,10 +50,11 @@ public:
     int alto = 480;
 
     //Objetos a crearse
-    Pacman* pacman;
-    Fantasma* fantasma[4];
-    Fruta* fruta[5];
-    Moneda* moneda[24];
+    vector<GameObject*> objects;
+    //Pacman* pacman;
+//Fantasma* fantasma[4];
+//Fruta* fruta[5];
+//Moneda* moneda[24];
 
     //Constructor
     Game_manager();
@@ -58,8 +64,11 @@ public:
     bool onInit();
     void onEvent(SDL_Event* Event);
     void onLoop();
-    bool ChangeImgFruta();
     void onRender();
     void onCleanup();
     SDL_Texture* loadTexture(string path);
 };
+
+
+
+ 

@@ -1,4 +1,10 @@
 #pragma once
+#include <SDL.h>
+#include <string>
+#include <vector>
+
+#include "Texture.h"
+
 class GameObject
 {
 protected:
@@ -14,12 +20,25 @@ protected:
 	int anchoPantalla;
 	int altoPantalla;
 
+	//Tipo de objeto
+	int tipo;
+
 	// Si el objeto es visible
-	bool visible;
+	bool visible = true;
+
+	//Textura
+	vector<Texture*> texture;
+
+	//Recortes y frames
+	int frameX;
+	int frameY;
+	int anchoClip;
+	int altoClip;
+	bool isClip;
 
 public:
 	//Constructores y destructores
-	GameObject(int _posicionX, int _posicionY, int _ancho, int _alto, int _anchoPantalla, int _altoPantalla);
+	GameObject(int _posicionX, int _posicionY, int _ancho, int _alto, int _anchoPantalla, int _altoPantalla, vector<Texture*> _textures, int _tipo, bool _isClip = false, int _frameX = 0, int _frameY = 0, int _anchoClip = 0, int _altoClip = 0);
 
 	//Metodos accesores
 	int getPosicionX() { return posicionX; }
@@ -41,5 +60,19 @@ public:
 	// Metodos varios
 
 	// Renderizar imagen
-	virtual void render();
+	void renderObjects();
+
+	/*virtual void Renderizar();*/
+
+	virtual void handleEvent(SDL_Event& e);
+
+	//Movimiento
+	virtual void move();
+
+	virtual void update();
+
+	virtual void show();
+	// Renderizar imagen
+	/*virtual void render();*/
 };
+	

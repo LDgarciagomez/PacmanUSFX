@@ -16,37 +16,37 @@ Texture::~Texture()
 
 bool Texture::loadFromImage(string path, Uint8 r, Uint8 g, Uint8 b)
 {
-	// Free the previous texture
+	//Liberar textura anterior
 	free();
 
-	// Return if the renderer was not set
+	//Comprobar si el renderizador está inicializado
 	if (Texture::renderer == nullptr) {
 		printf("Render no inicializado %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
 		return false;
 	}
 
-	// Load image to a surface
+	//Cargar imagen a la superficie
 	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
 	if (loadedSurface == nullptr) {
 		printf("Unable to load image %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
 		return false;
 	}
 
-	// Set color key
+	//Establecer colores
 	SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, r, g, b));
 
-	// Create texture from the surface
+	//Crea textura a partir de la superficie
 	texture = SDL_CreateTextureFromSurface(Texture::renderer, loadedSurface);
 	if (texture == nullptr) {
 		printf("Unable to create texture from surface %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
 		return false;
 	}
 
-	// Set width and height of the texture
+	//Establecer alto y ancho de la textura
 	ancho = loadedSurface->w;
 	alto = loadedSurface->h;
 
-	// Free the surface
+	//Liberar la superficie
 	SDL_FreeSurface(loadedSurface);
 
 	return true;
@@ -85,19 +85,14 @@ bool Texture::loadFromRenderedText(TTF_Font* font, string text, SDL_Color textCo
 	return true;
 }
 
-void Texture::render(int x, int y, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip renderFlip)
+void Texture::render(SDL_Rect* renderQuad, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip renderFlip)
 {
-	// Return if the renderer was not set
+	//Comprobar si el renderizador está inicializado
 	if (Texture::renderer == nullptr)
 		return;
 
-	SDL_Rect renderQuad = { x, y, ancho, alto };
-
-	if (clip != nullptr) {
-		renderQuad.w = clip->w;
-		renderQuad.h = clip->h;
-	}
-	SDL_RenderCopyEx(Texture::renderer, texture, clip, &renderQuad, angle, center, renderFlip);
+	//Renderizar la imagen en pantalla
+	SDL_RenderCopyEx(Texture::renderer, texture, clip, renderQuad, angle, center, renderFlip);
 }
 
 void Texture::setColor(Uint8 red, Uint8 green, Uint8 blue)
@@ -125,14 +120,4 @@ void Texture::free()
 		ancho = 0;
 		alto = 0;
 	}
-}
-
-int Texture::getAncho()
-{
-	return ancho;
-}
-
-int Texture::getAlto()
-{
-	return alto;
 }

@@ -2,29 +2,18 @@
 
 using namespace std;
 
-Fantasma::Fantasma(int _posicionX, int _posicionY, int _posicionXf, int _posicionYf) :
-	GameObject(_posicionX, _posicionY, ancho, alto, anchoPantalla, altoPantalla)
+Fantasma::Fantasma(int _posicionX, int _posicionY, int _posicionXf, int _posicionYf, int _tipo, vector<Texture*> _fantasmaTexture, bool _isClip, int _frameX, int _frameY, int _anchoClip, int _altoClip) :
+	GameObject(_posicionX, _posicionY, ancho, alto, anchoPantalla, altoPantalla, _fantasmaTexture, _tipo, _isClip, _frameX, _frameY, _anchoClip, _altoClip)
 {
 	velocidadX = 1;
 	velocidadY = 1;
 	velocidadPatron = 5;
-	ancho = 20;
-	alto = 20;
-	posicionXf = _posicionXf;
-	posicionYf = _posicionYf;
-}
-
-Fantasma::Fantasma(int _posicionX, int _posicionY, int _posicionXf, int _posicionYf, Texture* _fantasmaTexture) :
-	GameObject(_posicionX, _posicionY, ancho, alto, anchoPantalla, altoPantalla)
-{
-	velocidadX = 1;
-	velocidadY = 1;
-	velocidadPatron = 5;
-	ancho = 20;
-	alto = 20;
+	ancho = 25;
+	alto = 25;
 	fantasmaTexture = _fantasmaTexture;
 	posicionXf = _posicionXf;
 	posicionYf = _posicionYf;
+	tipo = _tipo;
 }
 
 
@@ -46,6 +35,7 @@ void Fantasma::move()
 				}
 				else {
 					posicionY += velocidadY;
+					frameY = 0;
 				}
 			}
 			else {
@@ -58,12 +48,14 @@ void Fantasma::move()
 				}
 				else {
 					posicionY -= velocidadY;
+					frameY = 0;
 				}
 
 			}
 		}
 		else {
 			posicionX += velocidadX;
+			frameY = 1;
 		}
 	}
 	else {
@@ -78,6 +70,7 @@ void Fantasma::move()
 				}
 				else {
 					posicionY += velocidadY;
+					frameY = 0;
 				}
 			}
 			else {
@@ -90,18 +83,34 @@ void Fantasma::move()
 				}
 				else {
 					posicionY -= velocidadY;
+					frameY = 0;
 				}
 
 			}
 		}
 		else {
 			posicionX -= velocidadX;
+			frameY = 1;
 		}
 	}
 }
 
-void Fantasma::render()
-{
-	SDL_Rect clip{ 0, 0, ancho, alto };
-	fantasmaTexture->render(posicionX, posicionY, &clip);
+
+void Fantasma::update() {
+	contadorFrames++;
+	if (contadorFrames >= 10)
+	{
+		frameX++;
+		if (frameX == framesMovimiento)
+		{
+			frameX -= 4;
+		}
+		contadorFrames = 0;
+	}
 }
+
+//void Fantasma::render()
+//{
+//	SDL_Rect clip{ 0, 0, ancho, alto };
+//	fantasmaTexture->render(posicionX, posicionY, &clip);
+//}

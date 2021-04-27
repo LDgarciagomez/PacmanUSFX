@@ -3,6 +3,7 @@
 #include <string>
 #include <stdlib.h>
 #include <time.h>
+#include <vector>
 
 #include <SDL.h>
 
@@ -24,11 +25,11 @@ private:
 public:
 
 	// Superficie gráfica de la moneda;
-	Texture* monedaTexture = nullptr;
+	vector<Texture*> monedaTexture;
 
 	//Constructores y destructores
-	Moneda(int _posicionX, int _posicionY, int _tipo, int _valor);
-	Moneda(int _posicionX, int _posicionY, int _tipo, int _valor, Texture* _monedaTexture);
+	/*Moneda(int _posicionX, int _posicionY, int _tipo, int _valor);*/
+	Moneda(int _posicionX, int _posicionY, int _tipo, int _valor, vector<Texture*> _monedaTexture);
 	//~Moneda();
 
 	//Metodos accesores
@@ -42,6 +43,6 @@ public:
 	// Metodos varios
 
 	// Renderizar imagen del fantasma
-	void render();
+	/*void Renderizar();*/
 
 };

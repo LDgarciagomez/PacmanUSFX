@@ -3,6 +3,7 @@
 #include <string>
 #include <stdlib.h>
 #include <time.h>
+#include <vector>
 
 #include <SDL.h>
 
@@ -30,14 +31,20 @@ private:
 	//Velocidad a la que mueve el fantasma en cualquier eje
 	int velocidadPatron;
 
+	//Tipo de fantasma
+	int tipo;
+
+	//Frame de la textura
+	int contadorFrames;
+	const int framesMovimiento = 4;
+
 public:
 
 	//Textura del fantasma;
-	Texture* fantasmaTexture;
+	vector<Texture*> fantasmaTexture;
 
 	//Constructores y destructores
-	Fantasma(int _posicionX, int _posicionY, int _posicionXf, int _posicionYf);
-	Fantasma(int _posicionX, int _posicionY, int _posicionXf, int _posicionYf, Texture* _fantasmaTexture);
+	Fantasma(int _posicionX, int _posicionY, int _posicionXf, int _posicionYf, int _tipo, vector<Texture*> _fantasmaTexture, bool _isClip, int _frameX, int _frameY, int _anchoClip, int _altoClip);
 	//~Fantasma();
 
 	//Metodos accesores
@@ -65,6 +72,11 @@ public:
 	void move();
 
 	// Renderizar imagen del fantasma
-	void render();
+	/*void Renderizar();*/
 
+	//Actualizar para la animación
+	void update();
+	// Renderizar imagen del fantasma
+	/*void render();*/
 };
+	

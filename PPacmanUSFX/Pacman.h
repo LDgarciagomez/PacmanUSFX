@@ -23,18 +23,24 @@ private:
 	// Velocidad a la que mueve el fantasma en cualquier eje
 	int velocidadPatron;
 
+	//Frame de la textura
+	int frame;
+	int contadorFrames;
+	int conjuntoFrames;
+	int framesMovimiento;
+
 public:
 
 	// Textura grafica de pacman;
-	Texture* pacmanTexture = nullptr;
+	vector<Texture*> pacmanTexture;
 
 	//Constructores y destructores
-	Pacman(int _posicionX, int _posicionY, int _velocidadPatro, Texture* _pacmanTexture);
+	Pacman(int _posicionX, int _posicionY, int _velocidadPatro, vector<Texture*> _pacmanTexture, bool _isClip, int _frameX, int _frameY, int _anchoClip, int _altoClip);
 	//~Pacman();
 
 	//Metodos accesores
-	//int getPosicionX() { return posicionX; }
-	//int getPosicionY() { return posicionY; }
+		//int getPosicionX() { return posicionX; }
+		//int getPosicionY() { return posicionY; }
 	int getVelocidadX() { return velocidadX; }
 	int getVelocidadY() { return velocidadY; }
 	int getVelocidadPatron() { return velocidadPatron; }
@@ -44,7 +50,7 @@ public:
 	int getAltoPantalla() { return altoPantalla; }*/
 
 	//void setPosicionX(int _posicionX) { posicionX = _posicionX; }
-	//void setPosicionY(int _posicionY) { posicionY = _posicionY; }
+//void setPosicionY(int _posicionY) { posicionY = _posicionY; }
 	void setVelocidadX(int _velocidadX) { velocidadX = _velocidadX; }
 	void setVelocidadY(int _velocidadY) { velocidadY = _velocidadY; }
 	void setVelocidadPatron(int _velocidadPatron) { velocidadPatron = _velocidadPatron; }
@@ -58,8 +64,7 @@ public:
 	//void setPosicionX(int _x) { posicion.x = _x; }
 	//void setPosicionX(int _y) { posicion.y = _y;  }
 	// 
-	// 
-	// 
+
 	// Metodos varios
 
 	// Manejador de eventos de pacman
@@ -69,7 +74,10 @@ public:
 	void move();
 
 	// Renderizar imagen Pacman
-	void render();
+	//void Renderizar();
 
+	void update();
+
+	// Renderizar imagen Pacman
+		//void render();
 };
-

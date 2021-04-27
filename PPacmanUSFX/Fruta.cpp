@@ -4,22 +4,8 @@
 #include <time.h>
 using namespace std;
 
-
-Fruta::Fruta(int _posicionX, int _posicionY, int _tipo) :
-	GameObject(_posicionX, _posicionY, ancho, alto, anchoPantalla, altoPantalla)
-{
-	ancho = 20;
-	alto = 20;
-	visible = false;
-	tiempoVisible = 100;
-	tiempoNoVisible = 150;
-	contadorTiempoVisible = 0;
-	contadorTiempoNoVisible = 0;
-	tipo = _tipo;
-};
-
 Fruta::Fruta(int _posicionX, int _posicionY, int _tipo, vector<Texture*> _frutaTexture) :
-	GameObject(_posicionX, _posicionY, ancho, alto, anchoPantalla, altoPantalla)
+	GameObject(_posicionX, _posicionY, ancho, alto, anchoPantalla, altoPantalla, _frutaTexture, _tipo)
 {
 	ancho = 20;
 	alto = 20;
@@ -32,7 +18,7 @@ Fruta::Fruta(int _posicionX, int _posicionY, int _tipo, vector<Texture*> _frutaT
 	frutaTexture = _frutaTexture;
 }
 
-void Fruta::mostrar()
+void Fruta::show()
 {
 
 	if (contadorTiempoVisible >= tiempoVisible) {
@@ -54,13 +40,10 @@ void Fruta::mostrar()
 		contadorTiempoVisible++;
 	}
 }
-
-void Fruta::render()
-{
-	if (visible) {
-		SDL_Rect clip = { 0, 0, ancho, alto };
-		frutaTexture[tipo]->render(posicionX, posicionY, &clip);
-
-	}
-
-}
+//void Fruta::render()
+//{
+//	if (visible) {
+//		SDL_Rect clip = { 0, 0, ancho, alto };
+//		frutaTexture[tipo]->render(posicionX, posicionY, &clip);
+//
+//	}

@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include <string>
@@ -14,28 +13,29 @@ private:
 	// Textura actual
 	SDL_Texture* texture;
 
+	// Dimensiones de la textura
 	int ancho;
 	int alto;
 
 public:
-	// Static SDL_Renderer so we don't have to ask for it
-	// when creating the texture or when rendering
-	// TODO: Temporary solution, should be removed after implementation of Game class
+
+	//Renderizador estático, se debe inicializar
 	static SDL_Renderer* renderer;
 
+	//Constructor y destructor
 	Texture();
 	~Texture();
 
-	// Load texture from file
+	//Cargar textura de una imagen
 	bool loadFromImage(string path, Uint8 r = 0, Uint8 g = 0, Uint8 b = 0);
 
-	// Load texture from rendered text
+	//Cargar textura de un texto
 	bool loadFromRenderedText(TTF_Font* font, string text, SDL_Color textColor);
 
-	// Render the texture
-	void render(int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip renderFlip = SDL_FLIP_NONE);
+	//Renderizar textura
+	void render(SDL_Rect* clip = NULL, SDL_Rect* renderQuad = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip renderFlip = SDL_FLIP_NONE);
 
-	// Set color
+	//Set color
 	void setColor(Uint8 red, Uint8 green, Uint8 blue);
 
 	// Set blend mode
@@ -44,10 +44,11 @@ public:
 	// Set alpha
 	void setAlpha(Uint8 alpha);
 
-	// Free assets
+	//Liberar memoria
 	void free();
 
-	int getAncho();
-	int getAlto();
+	//Métodos accesores
+	int getAncho() { return ancho; }
+	int getAlto() { return alto; }
 
 };

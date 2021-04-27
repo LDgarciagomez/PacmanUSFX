@@ -1,3 +1,4 @@
+
 #pragma once
 #include <iostream>
 #include <string>
@@ -21,7 +22,7 @@ private:
 	int tipo;
 
 	//Recursos para la funcion "mostrar"
-	bool visible;
+	/*bool visible;*/
 	int tiempoVisible;
 	int tiempoNoVisible;
 	int contadorTiempoVisible;
@@ -34,7 +35,6 @@ public:
 
 	//Constructores y destructores
 
-	Fruta(int _posicionX, int _posicionY, int tipo);
 	Fruta(int _posicionX, int _posicionY, int _tipo, vector<Texture*> _frutaTexture);
 	//~Fruta();
 
@@ -54,8 +54,10 @@ public:
 	// Metodos varios
 
 	// Mostrar u ocultar fruta
-	void mostrar();
+	void show();
 
 	// Renderizar imagen fruta
-	void render();
+	//void render();
+	
 };
+

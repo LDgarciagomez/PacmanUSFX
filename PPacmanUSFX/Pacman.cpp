@@ -1,7 +1,7 @@
 #include "Pacman.h"
 
-Pacman::Pacman(int _posicionX, int _posicionY, int _velocidadPatron, Texture* _pacmanTexture) :
-	GameObject(_posicionX, _posicionY, ancho, alto, anchoPantalla, altoPantalla)
+Pacman::Pacman(int _posicionX, int _posicionY, int _velocidadPatron, vector<Texture*> _pacmanTexture, bool _isClip, int _frameX, int _frameY, int _anchoClip, int _altoClip) :
+	GameObject(_posicionX, _posicionY, ancho, alto, anchoPantalla, altoPantalla, _pacmanTexture, 0, _isClip, _frameX, _frameY, _anchoClip, _altoClip)
 {
 	// Inicializa propiedade de de pacman
 	velocidadX = 0;
@@ -10,6 +10,7 @@ Pacman::Pacman(int _posicionX, int _posicionY, int _velocidadPatron, Texture* _p
 	ancho = 25;
 	alto = 25;
 	pacmanTexture = _pacmanTexture;
+	framesMovimiento = 2;
 }
 
 
@@ -21,10 +22,10 @@ void Pacman::handleEvent(SDL_Event& e)
 		// Se ajusta la velocidad
 		switch (e.key.keysym.sym)
 		{
-		case SDLK_UP: velocidadY -= velocidadPatron; break;
-		case SDLK_DOWN: velocidadY += velocidadPatron; break;
-		case SDLK_LEFT: velocidadX -= velocidadPatron; break;
-		case SDLK_RIGHT: velocidadX += velocidadPatron; break;
+		case SDLK_UP: velocidadY -= velocidadPatron; frameX = 2; frameY = 1; framesMovimiento = 4; break;
+		case SDLK_DOWN: velocidadY += velocidadPatron; frameX = 2; frameY = 0; framesMovimiento = 4;  break;
+		case SDLK_LEFT: velocidadX -= velocidadPatron; frameX = 0; frameY = 0; framesMovimiento = 2;  break;
+		case SDLK_RIGHT: velocidadX += velocidadPatron; frameX = 0; frameY = 1; framesMovimiento = 2; break;
 		}
 	}
 	// Si se ha soltado una tecla
@@ -65,8 +66,30 @@ void Pacman::move()
 	}
 }
 
-void Pacman::render()
-{
-	SDL_Rect clip = { 0, 0, ancho, alto };
-	pacmanTexture->render(posicionX, posicionY, &clip);
+//void Pacman::Renderizar()
+//{
+//	SDL_Rect renderQuad = { posicionX, posicionY, ancho, alto };
+//	if (isClip)
+//	{
+//		SDL_Rect clip = { 0 + frameX * ancho, 0 + frameY * alto , ancho, alto };
+//		pacmanTexture[0]->render(&renderQuad, &clip);
+//	}
+//	else
+//	{
+//		SDL_Rect* clip = NULL;
+//		pacmanTexture[0]->render(&renderQuad, clip);
+//	}
+//}
+
+void Pacman::update() {
+	contadorFrames++;
+	if (contadorFrames >= 10)
+	{
+		frameX++;
+		if (frameX == framesMovimiento)
+		{
+			frameX -= 2;
+		}
+		contadorFrames = 0;
+	}
 }
