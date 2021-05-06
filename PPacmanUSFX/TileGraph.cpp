@@ -2,60 +2,38 @@
 
 TileGraph::TileGraph()
 {
-	//tiles = nullptr;
-
 	anchoTileGraph = 0;
 	altoTileGraph = 0;
 }
 
 TileGraph::TileGraph(int _anchoTileGraph, int _altoTileGraph)
 {
-	// Crear un array dinamico de Tile
-	tiles = new Tile[_anchoTileGraph * _altoTileGraph];
-
-	// Set position of all tiles
-	// NOTE: This could propably be also made with constructor
 	for (int y = 0; y < _altoTileGraph; y++) {
 		for (int x = 0; x < _anchoTileGraph; x++) {
-			tiles[x + (y * _anchoTileGraph)].setPosicionX(x);
-			tiles[x + (y * _anchoTileGraph)].setPosicionY(y);
-			vectorTilesGraph.push_back(new Tile(x, y));
+			listaTilesGraph.push_back(new Tile(x, y));
 		}
 	}
-
 	anchoTileGraph = _anchoTileGraph;
 	altoTileGraph = _altoTileGraph;
 }
 
-void TileGraph::configurar(int _anchoTileGraph, int _altoTileGraph)
+void TileGraph::reconfigurar(int _anchoTileGraph, int _altoTileGraph)
 {
-	// If the TileGraph is not empty, empty it
-	if (tiles != nullptr)
-		delete[] tiles;
+	if (!listaTilesGraph.empty())
+		listaTilesGraph.clear();
 
-	tiles = new Tile[_anchoTileGraph * _altoTileGraph];
-
-	if (!vectorTilesGraph.empty())
-		vectorTilesGraph.clear();
-
-	// Set position of all tiles
-	// NOTE: This could propably be also made with constructor
 	for (int y = 0; y < _altoTileGraph; y++) {
 		for (int x = 0; x < _anchoTileGraph; x++) {
-			tiles[x + (y * _anchoTileGraph)].setPosicionX(x);
-			tiles[x + (y * _anchoTileGraph)].setPosicionY(y);
-
-			vectorTilesGraph.push_back(new Tile(x, y));
+			listaTilesGraph.push_back(new Tile(x, y));
 		}
 	}
-
 	anchoTileGraph = _anchoTileGraph;
 	altoTileGraph = _altoTileGraph;
 }
 
 TileGraph::~TileGraph()
 {
-	delete[] tiles;
+	listaTilesGraph.clear();
 }
 
 Tile* TileGraph::getTileEn(int x, int y)
@@ -63,9 +41,12 @@ Tile* TileGraph::getTileEn(int x, int y)
 	int indice = getIndice(x, y);
 	if (indice < 0)
 		return nullptr;
-
-	//return vectorTilesGraph[indice];
-	return &tiles[indice];
+	int c = 0;
+	for (auto ilvo = listaTilesGraph.begin(); ilvo != listaTilesGraph.end(); ++ilvo) {
+		if (c == indice) {
+			return (*ilvo);
+		}
+	}
 }
 
 array<Tile*, 4> TileGraph::get4Vecinos(Tile* tile)
@@ -105,7 +86,7 @@ array<Tile*, 8> TileGraph::get8Vecinos(Tile* tile)
 Pacman* TileGraph::getPacman()
 {
 	for (unsigned int i = 0; i < anchoTileGraph * altoTileGraph; i++) {
-		Tile tile = tiles[i];
+		Tile tile = Tiles[i];
 
 		if (tile.getPacman() != nullptr)
 			return tile.getPacman();
