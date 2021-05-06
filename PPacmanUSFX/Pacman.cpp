@@ -22,10 +22,10 @@ void Pacman::handleEvent(SDL_Event& e)
 		// Se ajusta la velocidad
 		switch (e.key.keysym.sym)
 		{
-		case SDLK_UP: velocidadY -= velocidadPatron; frameX = 2; frameY = 1; framesMovimiento = 4; break;
-		case SDLK_DOWN: velocidadY += velocidadPatron; frameX = 2; frameY = 0; framesMovimiento = 4;  break;
-		case SDLK_LEFT: velocidadX -= velocidadPatron; frameX = 0; frameY = 0; framesMovimiento = 2;  break;
-		case SDLK_RIGHT: velocidadX += velocidadPatron; frameX = 0; frameY = 1; framesMovimiento = 2; break;
+		case SDLK_UP: velocidadY -= velocidadPatron; frameY = 2; break;
+		case SDLK_DOWN: velocidadY += velocidadPatron; frameY = 3;  break;
+		case SDLK_LEFT: velocidadX -= velocidadPatron; frameY = 1;  break;
+		case SDLK_RIGHT: velocidadX += velocidadPatron; frameY = 0; break;
 		}
 	}
 	// Si se ha soltado una tecla
@@ -65,7 +65,6 @@ void Pacman::move()
 		posicionY -= velocidadY;
 	}
 }
-
 //void Pacman::Renderizar()
 //{
 //	SDL_Rect renderQuad = { posicionX, posicionY, ancho, alto };
@@ -79,7 +78,6 @@ void Pacman::move()
 //		SDL_Rect* clip = NULL;
 //		pacmanTexture[0]->render(&renderQuad, clip);
 //	}
-//}
 
 void Pacman::update() {
 	contadorFrames++;
@@ -88,8 +86,10 @@ void Pacman::update() {
 		frameX++;
 		if (frameX == framesMovimiento)
 		{
-			frameX -= 2;
+			frameX -= framesMovimiento;
 		}
 		contadorFrames = 0;
 	}
 }
+
+

@@ -153,13 +153,17 @@
     <ClCompile Include="Habilidad.cpp" />
     <ClCompile Include="Laberinto.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MapGenerator.cpp" />
     <ClCompile Include="Moneda.cpp" />
     <ClCompile Include="Muro.cpp" />
     <ClCompile Include="Nivel.cpp" />
     <ClCompile Include="ObjetoJuego.cpp" />
     <ClCompile Include="Pacman.cpp" />
+    <ClCompile Include="Pila.cpp" />
     <ClCompile Include="Super_moneda.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Contador_de_puntos.h" />
@@ -171,6 +175,7 @@
     <ClInclude Include="Game_manager.h" />
     <ClInclude Include="Generador_fantasmas.h" />
     <ClInclude Include="Habilidad.h" />
+    <ClInclude Include="MapGenerator.h" />
     <ClInclude Include="Movimiento.h" />
     <ClInclude Include="Laberinto.h" />
     <ClInclude Include="Moneda.h" />
@@ -178,8 +183,11 @@
     <ClInclude Include="Nivel.h" />
     <ClInclude Include="ObjetoJuego.h" />
     <ClInclude Include="Pacman.h" />
+    <ClInclude Include="Pila.h" />
     <ClInclude Include="Super_moneda.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileGraph.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

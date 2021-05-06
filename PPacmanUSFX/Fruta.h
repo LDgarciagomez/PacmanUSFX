@@ -1,4 +1,3 @@
-
 #pragma once
 #include <iostream>
 #include <string>
@@ -22,11 +21,14 @@ private:
 	int tipo;
 
 	//Recursos para la funcion "mostrar"
-	/*bool visible;*/
 	int tiempoVisible;
 	int tiempoNoVisible;
 	int contadorTiempoVisible;
 	int contadorTiempoNoVisible;
+
+	//Frame de la textura
+	int contadorFrames;
+	int framesMovimiento = 4;
 
 public:
 
@@ -35,7 +37,7 @@ public:
 
 	//Constructores y destructores
 
-	Fruta(int _posicionX, int _posicionY, int _tipo, vector<Texture*> _frutaTexture);
+	Fruta(int _posicionX, int _posicionY, int _tipo, vector<Texture*> _frutaTexture, bool _isClip, int _frameX, int _frameY, int _anchoClip, int _altoClip);
 	//~Fruta();
 
 	//Metodos accesores
@@ -56,8 +58,13 @@ public:
 	// Mostrar u ocultar fruta
 	void show();
 
+	//Actualizar para la animación
+	void update();
+
+};
+
 	// Renderizar imagen fruta
 	//void render();
 	
-};
+
 

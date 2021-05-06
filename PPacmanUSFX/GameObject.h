@@ -62,7 +62,7 @@ public:
 	// Renderizar imagen
 	void renderObjects();
 
-	/*virtual void Renderizar();*/
+	//virtual void Renderizar();
 
 	virtual void handleEvent(SDL_Event& e);
 
@@ -72,7 +72,4 @@ public:
 	virtual void update();
 
 	virtual void show();
-	// Renderizar imagen
-	/*virtual void render();*/
 };
-	

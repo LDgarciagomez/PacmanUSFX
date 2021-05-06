@@ -24,10 +24,8 @@ private:
 	int velocidadPatron;
 
 	//Frame de la textura
-	int frame;
 	int contadorFrames;
-	int conjuntoFrames;
-	int framesMovimiento;
+	int framesMovimiento = 2;
 
 public:
 
@@ -38,6 +36,7 @@ public:
 	Pacman(int _posicionX, int _posicionY, int _velocidadPatro, vector<Texture*> _pacmanTexture, bool _isClip, int _frameX, int _frameY, int _anchoClip, int _altoClip);
 	//~Pacman();
 
+	
 	//Metodos accesores
 		//int getPosicionX() { return posicionX; }
 		//int getPosicionY() { return posicionY; }
@@ -49,25 +48,23 @@ public:
 	int getAnchoPantalla() { return anchoPantalla; }
 	int getAltoPantalla() { return altoPantalla; }*/
 
-	//void setPosicionX(int _posicionX) { posicionX = _posicionX; }
-//void setPosicionY(int _posicionY) { posicionY = _posicionY; }
 	void setVelocidadX(int _velocidadX) { velocidadX = _velocidadX; }
 	void setVelocidadY(int _velocidadY) { velocidadY = _velocidadY; }
 	void setVelocidadPatron(int _velocidadPatron) { velocidadPatron = _velocidadPatron; }
 	/*void setAncho(int _ancho) { ancho = _ancho; }
-	void setAlto(int _alto) { alto = _alto; }
-	void setAnchoPantalla(int _anchoPantalla) { anchoPantalla = _anchoPantalla; }
-	void setAltoPantalla(int _altoPantalla) { altoPantalla = _altoPantalla; }*/
-	//** OTRA FORMA**
-	//int getPosicionX() { return posicion.x; }
-	//int getPosicionY() { return posicion.y; }
-	//void setPosicionX(int _x) { posicion.x = _x; }
-	//void setPosicionX(int _y) { posicion.y = _y;  }
-	// 
+		void setAlto(int _alto) { alto = _alto; }
+		void setAnchoPantalla(int _anchoPantalla) { anchoPantalla = _anchoPantalla; }
+		void setAltoPantalla(int _altoPantalla) { altoPantalla = _altoPantalla; }*/
+		//** OTRA FORMA**
+		//int getPosicionX() { return posicion.x; }
+		//int getPosicionY() { return posicion.y; }
+		//void setPosicionX(int _x) { posicion.x = _x; }
+		//void setPosicionX(int _y) { posicion.y = _y;  }
+		// 
 
-	// Metodos varios
+		// Metodos varios
 
-	// Manejador de eventos de pacman
+		// Manejador de eventos de pacman
 	void handleEvent(SDL_Event& e);
 
 	// Mover pacman
@@ -81,3 +78,4 @@ public:
 	// Renderizar imagen Pacman
 		//void render();
 };
+

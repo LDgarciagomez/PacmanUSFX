@@ -22,14 +22,17 @@ private:
 	//Tipo de moneda (Moneda/Supermoneda)
 	int tipo;
 
+	//Frame de la textura
+	int contadorFrames;
+	int framesMovimiento;
+
 public:
 
 	// Superficie gráfica de la moneda;
 	vector<Texture*> monedaTexture;
 
 	//Constructores y destructores
-	/*Moneda(int _posicionX, int _posicionY, int _tipo, int _valor);*/
-	Moneda(int _posicionX, int _posicionY, int _tipo, int _valor, vector<Texture*> _monedaTexture);
+	Moneda(int _posicionX, int _posicionY, int _tipo, int _valor, vector<Texture*> _monedaTexture, bool _isClip, int _frameX, int _frameY, int _anchoClip, int _altoClip);
 	//~Moneda();
 
 	//Metodos accesores
@@ -42,7 +45,7 @@ public:
 
 	// Metodos varios
 
-	// Renderizar imagen del fantasma
-	/*void Renderizar();*/
+	//Actualizar para la animación
+	void update();
 
 };

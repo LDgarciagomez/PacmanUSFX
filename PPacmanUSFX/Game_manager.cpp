@@ -14,53 +14,26 @@ int Game_manager::onExecute() {
 	if (onInit() == false) {
 		return -1;
 	}
-	srand(time(NULL));
-	objects.push_back(new Pacman(ancho / 2, alto / 2, 5, gPacmanTexture, true, 0, 0, 25, 25));
-	for (int i = 0; i <= 3; i++)
-	{
-		int x = 1 + rand() % (ancho - 1);
-		int y = 1 + rand() % (alto - 1);
-		int xf = 1 + rand() % (ancho - 1);
-		int yf = 1 + rand() % (alto - 1);
-		objects.push_back(new Fantasma(x, y, xf, yf, i, gFantasmaTexture, true, 0, 0, 25, 25));
-	}
-	for (int i = 0; i <= 4; i++)
-	{
-		int t = rand() % 5;
-		int x = 1 + rand() % (ancho - 1);
-		int y = 100 + rand() % (alto - 1);
-		objects.push_back(new Fruta(x, y, t, gFrutaTexture));
-	}
-
-	for (int i = 0; i <= 23; i++)
-	{
-		int x = 1 + rand() % (ancho - 1);
-		int y = 1 + rand() % (alto - 1);
-		if (i <= 19)
-			objects.push_back(new Moneda(x, y, 0, 100, gMonedaTexture));
-		else
-			objects.push_back(new Moneda(x, y, 1, 500, gMonedaTexture));
-	}
+	generadorNivelJuego = new MapGenerator(alto, ancho);
+	generadorNivelJuego->load("Resources/mapa.txt");
+	generadorNivelJuego->populate(listObjects);
 
 	SDL_Event Event;
 
 	while (juego_en_ejecucion) {
 		while (SDL_PollEvent(&Event)) {
 			onEvent(&Event);
-			for (int i = 0; i < objects.size(); i++)
+			//for (int i = 0; i < objects.size(); i++)
+			for (auto ilvo = listObjects.begin(); ilvo != listObjects.end(); ++ilvo)
 			{
-				objects[i]->handleEvent(Event);
+				((GameObject*)*ilvo)->handleEvent(Event);
 			}
 		}
-		/*Mover Fantasma*/
-		for (int i = 0; i < objects.size(); i++)
+
+		for (auto ilvo = listObjects.begin(); ilvo != listObjects.end(); ++ilvo)
 		{
-			objects[i]->move();
-		}
-		//Mostrar y ocultar frutas
-		for (int i = 0; i < objects.size(); i++)
-		{
-			objects[i]->show();
+			((GameObject*)*ilvo)->move();
+			((GameObject*)*ilvo)->show();
 		}
 
 		//Limpiar pantalla
@@ -121,62 +94,6 @@ bool Game_manager::onInit() {
 
 			Texture::renderer = gRenderer;
 
-			gPacmanTexture.push_back(new Texture());
-			if (!gPacmanTexture[0]->loadFromImage("Resources/PacMan.bmp")) {
-				cout << "Fallo en la carga de la textura" << endl;
-				return false;
-			}
-			gFantasmaTexture.push_back(new Texture());
-			if (!gFantasmaTexture[0]->loadFromImage("Resources/Blinky.bmp")) {
-				cout << "Fallo en la carga de la textura" << endl;
-				return false;
-			}
-			gFantasmaTexture.push_back(new Texture());
-			if (!gFantasmaTexture[1]->loadFromImage("Resources/Clyde.bmp")) {
-				cout << "Fallo en la carga de la textura" << endl;
-				return false;
-			}
-			gFantasmaTexture.push_back(new Texture());
-			if (!gFantasmaTexture[2]->loadFromImage("Resources/Inkey.bmp")) {
-				cout << "Fallo en la carga de la textura" << endl;
-				return false;
-			}
-			gFantasmaTexture.push_back(new Texture());
-			if (!gFantasmaTexture[3]->loadFromImage("Resources/Pinky.bmp")) {
-				cout << "Fallo en la carga de la textura" << endl;
-				return false;
-			}
-			gMonedaTexture.push_back(new Texture());
-			if (!gMonedaTexture[0]->loadFromImage("Resources/point.bmp")) {
-				cout << "Fallo en la carga de la textura" << endl;
-				return false;
-			}
-			gMonedaTexture.push_back(new Texture());
-			if (!gMonedaTexture[1]->loadFromImage("Resources/point2.bmp")) {
-				cout << "Fallo en la carga de la textura" << endl;
-				return false;
-			}
-			gFrutaTexture.push_back(new Texture());
-			if (!gFrutaTexture[0]->loadFromImage("Resources/Fruta01.png")) {
-				cout << "Fallo en la carga de la textura" << endl;
-				return false;
-			}
-			gFrutaTexture.push_back(new Texture());
-			if (!gFrutaTexture[1]->loadFromImage("Resources/Fruta02.png")) {
-				cout << "Fallo en la carga de la textura" << endl;
-				return false;
-			}
-			gFrutaTexture.push_back(new Texture());
-			if (!gFrutaTexture[2]->loadFromImage("Resources/Fruta03.png")) {
-				cout << "Fallo en la carga de la textura" << endl;
-				return false;
-			}
-			gFrutaTexture.push_back(new Texture());
-			if (!gFrutaTexture[3]->loadFromImage("Resources/Fruta04.png")) {
-				cout << "Fallo en la carga de la textura" << endl;
-				return false;
-			}
-			
 		}
 
 	}
@@ -192,14 +109,10 @@ void Game_manager::onEvent(SDL_Event* Event) {
 void Game_manager::onLoop() {};
 
 void Game_manager::onRender() {
-	for (int i = 0; i < objects.size(); i++)
+	for (auto ilvo = listObjects.begin(); ilvo != listObjects.end(); ++ilvo)
 	{
-		objects[i]->update();
-	}
-
-	for (int i = 0; i < objects.size(); i++)
-	{
-		objects[i]->renderObjects();
+		((GameObject*)*ilvo)->update();
+		((GameObject*)*ilvo)->renderObjects();
 	}
 };
 

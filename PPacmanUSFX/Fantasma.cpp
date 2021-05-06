@@ -8,8 +8,8 @@ Fantasma::Fantasma(int _posicionX, int _posicionY, int _posicionXf, int _posicio
 	velocidadX = 1;
 	velocidadY = 1;
 	velocidadPatron = 5;
-	ancho = 25;
-	alto = 25;
+	ancho = 35;
+	alto = 35;
 	fantasmaTexture = _fantasmaTexture;
 	posicionXf = _posicionXf;
 	posicionYf = _posicionYf;
@@ -95,7 +95,6 @@ void Fantasma::move()
 	}
 }
 
-
 void Fantasma::update() {
 	contadorFrames++;
 	if (contadorFrames >= 10)
@@ -103,7 +102,7 @@ void Fantasma::update() {
 		frameX++;
 		if (frameX == framesMovimiento)
 		{
-			frameX -= 4;
+			frameX -= framesMovimiento;
 		}
 		contadorFrames = 0;
 	}

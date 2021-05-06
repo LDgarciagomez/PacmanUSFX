@@ -1,15 +1,19 @@
-xxxxxxxxxxxxxxxxxxxx
-x..................x
-x.xxxxxxxxxxxxxxxx.x
-x.x       b      x.x
-x.xxxxxxxxxxxxxxxx.x
-x..................x
-x.x.x.x.x.x.x.x.x..x
-x.x.x.x.x.x.x.x.xxxx
-x.x.x.x.x.x.x.x.x..x
-x.xxxxxxxxxxxxxxx..x
-x.....p.......x....x
-xxxxx...xxx...xxxxxx
-x.......xxx........x
-x.......xxx........x
-x..x..x.....x..x..xx
+xxxxxxxxxxxx..xxxxxxxxxxxx
+x+.................F....+x
+x.x.xx.xxx.xxxx.xxx.xx.x.x
+x.x.xx.x+  bpic  +x.xx.x.x
+x.x.xx.xxxxxxxxxxxx.xx.x.x
+x.....F..................x
+x.xxx.xxx.xx.xx..xxx.xxx.x
+x.........xx.xx..........x
+x.xxx.xxx.xx.xx..xxx.xxx.x
+x........................x
+..xxxxxxxxxx.xxxxxxxxxxx.F
+x.xx..................xx.x
+x.xx.xx.xxxx.xxxx..xx.xx.x
+x.xx.xx.x...P...x..xx.xx.x
+x....xx.xxxxxxxxx..xx....x
+x.xx............F.....xx.x
+x.xxxxxxxxxxxxxxxxxxxxxx.x
+x+.......F..............+x
+xxxxxxxxxxxx..xxxxxxxxxxxx

@@ -6,8 +6,8 @@ GameObject::GameObject(int _posicionX, int _posicionY, int _ancho, int _alto, in
 	posicionY = _posicionY;
 	ancho = _ancho;
 	alto = _alto;
-	anchoPantalla = 640;
-	altoPantalla = 480;
+	anchoPantalla = 800;
+	altoPantalla = 600;
 	isClip = _isClip;
 	frameX = _frameX;
 	frameY = _frameY;
@@ -48,4 +48,3 @@ void GameObject::move() {};
 void GameObject::update() {};
 
 void GameObject::show() {};
-//void GameObject::render() {};
